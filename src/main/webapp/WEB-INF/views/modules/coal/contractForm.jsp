@@ -34,8 +34,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/coal/contract/">合同列表</a></li>
-		<li class="active"><a href="${ctx}/coal/contract/form?contractSid=${contract.contractSid}">合同<shiro:hasPermission name="coal:contract:edit">${not empty contract.contractSid?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="coal:contract:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/coal/contract/form">煤矿合同录入</a></li>
+		<%--<li class="active"><a href="${ctx}/coal/contract/form?contractSid=${contract.contractSid}">合同<shiro:hasPermission name="coal:contract:edit">${not empty contract.contractSid?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="coal:contract:edit">查看</shiro:lacksPermission></a></li>--%>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="contract" action="${ctx}/coal/contract/save" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<form:hidden path="contractSid"/>
@@ -78,7 +78,7 @@
                     <div class="control-group">
                         <label class="control-label">供方名称 ：</label>
                         <div class="controls">
-                            <tags:commonselect id="supplyId" name="supplyId" value="${contract.supplyId}" labelName="supplyName" labelValue="${fncoal:getSupplyName(contract.supplyId)}"
+                            <tags:commonselect id="supplyId" name="supplyId" value="${contract.supplyId}" labelName="supplyName" labelValue="Provider of mine"
                                                title="供方" url="${ctx}/coal/supply/findByName"/>
                         </div>
                     </div>
@@ -87,14 +87,14 @@
                     <div class="control-group">
                         <label class="control-label">需方名称 ：</label>
                         <div class="controls">
-                            <tags:commonselect id="demandId" name="demandId" value="${contract.demandId}" labelName="demandName" labelValue="${fncoal:getDemandName(contract.demandId)}"
-                                               title="需方" url="${ctx}/coal/demand/findByName"/>
+                            <%--<tags:commonselect id="demandId" name="demandId" value="12345678&lt;%&ndash;${contract.demandId}&ndash;%&gt;" labelName="demandName" labelValue="12345678&lt;%&ndash;${fncoal:getDemandName(contract.demandId)}&ndash;%&gt;"--%>
+                                               <%--title="需方" url="${ctx}/coal/demand/findByName"/>--%>
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>
+                <%--<td>
                     <div class="control-group">
                         <label class="control-label">煤种 ：</label>
                         <div class="controls">
@@ -191,9 +191,9 @@
                             </form:select>
                         </div>
                     </div>
-                </td>
+                </td>--%>
             </tr>
-            <tr>
+            <%--<tr>
                 <td>
                     <div class="control-group">
                         <label class="control-label">合同生效时间 ：</label>
@@ -224,8 +224,8 @@
                         </div>
                     </div>
                 </td>
-            </tr>
-            <c:if test ="${not empty contract.files}">
+            </tr>--%>
+            <%--<c:if test ="${not empty contract.files}">
                 <tr>
                     <td  colspan="3">
                         <div class="control-group">
@@ -244,8 +244,8 @@
 
                     </td>
                 </tr>
-            </c:if>
-            <tr>
+            </c:if>--%>
+            <%--<tr>
                 <td  colspan="2">
                     <div class="control-group">
                         <label class="control-label">上传文件:</label>
@@ -264,7 +264,7 @@
                     </div>
 
                 </td>
-            </tr>
+            </tr>--%>
         </table>
 		<div class="form-actions">
 			<shiro:hasPermission name="coal:contract:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保存"/>&nbsp;</shiro:hasPermission>

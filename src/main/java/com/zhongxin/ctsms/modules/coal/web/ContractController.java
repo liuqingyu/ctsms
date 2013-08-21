@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zhongxin.ctsms.common.config.Global;
@@ -68,6 +69,48 @@ public class ContractController extends BaseController {
 		return "modules/coal/contractForm";
 	}
 
+    @RequiresPermissions("coal:contract:view")
+    @RequestMapping(value = "purchaseForm")
+    public String purchaseForm(Contract contract, Model model) {
+        model.addAttribute("contract", contract);
+        return "modules/coal/purchaseForm";
+    }
+
+    @RequiresPermissions("coal:contract:view")
+    @RequestMapping(value = "saleContract")
+    public String saleContract(Contract contract, Model model) {
+        model.addAttribute("contract", contract);
+        return "modules/coal/saleContract";
+    }
+
+    @RequiresPermissions("coal:contract:view")
+    @RequestMapping(value = "search")
+    public String contractSearch(Contract contract, Model model) {
+        model.addAttribute("contract", contract);
+        return "modules/coal/contractSearch";
+    }
+
+    @RequiresPermissions("coal:contract:edit")
+    @RequestMapping(value = "detailsLook")
+    public String detailsLook(Contract contract, Model model) {
+        model.addAttribute("contract", contract);
+        return "modules/coal/detailsLook";
+    }
+
+    @RequiresPermissions("coal:contract:edit")
+    @RequestMapping(value = "synchronize")
+    public String synchronize(Contract contract, Model model) {
+        model.addAttribute("contract", contract);
+        return "modules/coal/contractSynchronize";
+    }
+
+    @RequiresPermissions("coal:contract:view")
+    @RequestMapping(value = "coalPriceLook")
+    public String coalPriceLook(Contract contract, Model model) {
+        model.addAttribute("contract", contract);
+        return "modules/coal/coalPriceLook";
+    }
+
 	@RequiresPermissions("coal:contract:edit")
 	@RequestMapping(value = "save")
 	public String save(Contract contract, Model model, HttpServletRequest request,RedirectAttributes redirectAttributes) {
@@ -76,19 +119,19 @@ public class ContractController extends BaseController {
 		}
 
         // 处理文件上传
-        if (contract.getFileData() != null) {
-            String pathDir = "/upload/" + contract.getContractId() + "/";
-            List<PFile> files = null;
-            try {
-                files = FileOperateUtil.upload(request, contract.getFileData(), pathDir);
-                for(PFile f : files){
-                    f.setContract(contract);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-            contract.setFiles(files);
-        }
+//        if (contract.getFileData() != null) {
+//            String pathDir = "/upload/" + contract.getContractId() + "/";
+//            List<PFile> files = null;
+//            try {
+//                files = FileOperateUtil.upload(request, contract.getFileData(), pathDir);
+//                for(PFile f : files){
+//                    f.setContract(contract);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            }
+//            contract.setFiles(files);
+//        }
 		contractService.save(contract);
 		addMessage(redirectAttributes, "保存合同'" + contract.getContractId() + "'成功");
 		return "redirect:"+Global.getAdminPath()+"/coal/contract/?repage";
@@ -97,7 +140,7 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("coal:contract:edit")
 	@RequestMapping(value = "delete")
 	public String delete(Long id, RedirectAttributes redirectAttributes) {
-		contractService.delete(id);
+//		contractService.delete(id);
 		addMessage(redirectAttributes, "删除合同成功");
 		return "redirect:"+Global.getAdminPath()+"/coal/contract/?repage";
 	}
@@ -107,13 +150,24 @@ public class ContractController extends BaseController {
     public String delFile(Contract contract, Model model,String id, String prjId) {
         contractService.delPFileById(Long.valueOf(id));
         contract = contractService.get(Long.valueOf(prjId));
-        for(PFile pFile : contract.getFiles()){
-            if(Long.valueOf(id) == pFile.getId()){
-                contract.getFiles().remove(pFile);
-            }
-        }
+//        for(PFile pFile : contract.getFiles()){
+//            if(Long.valueOf(id) == pFile.getId()){
+//                contract.getFiles().remove(pFile);
+//            }
+//        }
         model.addAttribute("contract", contract);
         return "modules/coal/contractForm";
     }
 
+    /**
+     * 通过名字获取
+     */
+    /*@RequiresPermissions("coal:contract:view")
+    @ResponseBody
+    @RequestMapping(value = "findByName")
+    public String findByName(String name, Model model) {
+//        List<Supply> list = supplyService.findBySupplyNameLike(name);
+//        return JsonMapper.nonDefaultMapper().toJson(list);
+        return "Mine";
+    }*/
 }

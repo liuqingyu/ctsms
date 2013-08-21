@@ -10,34 +10,34 @@ import org.springframework.stereotype.Component;
 
 import com.zhongxin.ctsms.common.persistence.BaseDao;
 import com.zhongxin.ctsms.common.persistence.BaseDaoImpl;
-import com.zhongxin.ctsms.modules.coal.entity.Contract;
+import com.zhongxin.ctsms.modules.coal.entity.CoalPrice;
 
 /**
- * 合同DAO接口
- * @author Blue Devil
- * @version 2013-07-01
+ * 鐓や环DAO接口
+ * @author Yake
+ * @version 2013-08-18
  */
-public interface ContractDao extends ContractDaoCustom, CrudRepository<Contract, Long> {
+public interface CoalPriceDao extends CoalPriceDaoCustom, CrudRepository<CoalPrice, Long> {
 
 	@Modifying
-	@Query("update Contract set delFlag='" + Contract.DEL_FLAG_DELETE + "' where id = ?1")
+	@Query("update CoalPrice set delFlag='" + CoalPrice.DEL_FLAG_DELETE + "' where id = ?1")
 	public int deleteById(Long id);
-
+	
 }
 
 /**
  * DAO Custome Interface
- * @author Blue Devil
+ * @author Yake
  */
-interface ContractDaoCustom extends BaseDao<Contract> {
+interface CoalPriceDaoCustom extends BaseDao<CoalPrice> {
 
 }
 
 /**
  * DAO Custome Interface Implementation
- * @author Blue Devil
+ * @author Yake
  */
 @Component
-class ContractDaoImpl extends BaseDaoImpl<Contract> implements ContractDaoCustom {
+class CoalPriceDaoImpl extends BaseDaoImpl<CoalPrice> implements CoalPriceDaoCustom {
 
 }

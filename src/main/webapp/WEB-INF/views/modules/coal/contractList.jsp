@@ -33,7 +33,7 @@
 	</form:form>
 	<tags:message content="${message}"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>序号</th><th>合同类型</th><th>合同编号</th><th>供方</th><th>需方</th><th>签订日期</th><shiro:hasPermission name="coal:contract:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+		<thead><tr><th>序号</th><th>合同类型</th><th>合同编号</th><th>供方</th><%--<th>需方</th>--%><th>签订日期</th><shiro:hasPermission name="coal:contract:edit"><th>操作</th></shiro:hasPermission></tr></thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="contract">
 			<tr>
@@ -41,7 +41,7 @@
 				<td>${fns:getDictLabel(contract.contractType,'contract_type','')}</td>
                 <td>${contract.contractId}</td>
                 <td>${fncoal:getSupplyName(contract.supplyId)}</td>
-                <td>${fncoal:getDemandName(contract.demandId)}</td>
+                <%--<td>${fncoal:getDemandName(contract.demandId)}</td>--%>
                 <td><fmt:formatDate value="${contract.signDate}" pattern="yyyy-MM-dd"/></td>
 				<shiro:hasPermission name="coal:contract:edit"><td>
     				<a href="${ctx}/coal/contract/form?id=${contract.contractSid}">修改</a>

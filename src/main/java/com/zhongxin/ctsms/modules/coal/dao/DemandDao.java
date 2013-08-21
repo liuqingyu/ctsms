@@ -23,12 +23,12 @@ public interface DemandDao extends DemandDaoCustom, CrudRepository<Demand,Long> 
 
     public Demand findByDemandId(Long id);
 
-    @Query("from Demand where delFlag='" + Demand.DEL_FLAG_NORMAL + "'")
-    public List<Demand> findAllList();
-
-    @Modifying
-    @Query("update Demand set delFlag='" + Demand.DEL_FLAG_DELETE + "' where demandId = ?1")
-    public void deleteById(Long id);
+//    @Query("from Demand where delFlag='" + Demand.DEL_FLAG_NORMAL + "'")
+//    public List<Demand> findAllList();
+//
+//    @Modifying
+//    @Query("update Demand set delFlag='" + Demand.DEL_FLAG_DELETE + "' where demandId = ?1")
+//    public void deleteById(Long id);
 
     List<Object[]> findByDemandNameContaining(String name);
 }

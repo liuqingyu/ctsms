@@ -8,8 +8,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.lang.String;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -32,34 +33,41 @@ public class Contract extends DataEntity implements Serializable {
 
     private Long contractSid; // 主键ID
     private String contractId; // 合同编号
+    private String contractOId; //
     private String processInstanceId; // 流程实例ID
     private String contractType; // 合同类型
     private String supplyId; // 供方编码
-    private String demandId; // 需方编码
-    private Long number; // 数量
-    private Long amount; // 金额
+    private String settlmentType; //
+    private String lossType; //
+    private String lossWeight; //
+    private String invoiceType; //
+    private String taxFlag; //
+    private String sendAddr; //
+    private String staffId; //
     private String feeSts; //费用状态
     private Integer feeItemId; // 费用流水
     private String sts; // 状态
     private Date stsDate; //状态时间
+
     private Date signDate; //签订日期
+    private String rsrvStr1; //
+    private String rsrvStr2; //
+    private String rsrvStr3; //
+    private String rsrvStr4; //
+    private String rsrvStr5; //
     private Date startDate; //开始时间
     private Date endDate; //结束时间
 
-    private String coalType; // 煤种
-    private Integer calorie; // 热卡
-    private Float price; // 执行单价
-    private String deliveryPlace; // 交货地点
-    private String taxFlag; // 是否含税 0:不含  1:含
-    private String payMode; // 结算方式
-    private String transType; // 运输类型
-    private String payType; // 结算类型
+    public String getContractOId() {
+        return contractOId;
+    }
 
-    private List<PFile> files; // 上传的项目相关文件
-    @Transient
-    private List<CommonsMultipartFile> fileData;
+    public void setContractOId(String contractOId) {
+        this.contractOId = contractOId;
+    }
 
     public Contract() {
+
         super();
         this.sts = "0";
         this.stsDate = new Date();
@@ -114,30 +122,52 @@ public class Contract extends DataEntity implements Serializable {
         this.supplyId = supplyId;
     }
 
-    public String getDemandId() {
-        return demandId;
+    public String getSettlmentType() {
+        return settlmentType;
     }
 
-    public void setDemandId(String demandId) {
-        this.demandId = demandId;
+    public void setSettlmentType(String settlmentType) {
+        this.settlmentType = settlmentType;
     }
 
-    @NotNull
-    public Long getNumber() {
-        return number;
+    public String getLossType() {
+        return lossType;
     }
 
-    public void setNumber(Long number) {
-        this.number = number;
+    public void setLossType(String lossType) {
+        this.lossType = lossType;
     }
 
-    @NotNull
-    public Long getAmount() {
-        return amount;
+    public String getLossWeight() {
+        return lossWeight;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setLossWeight(String lossWeight) {
+        this.lossWeight = lossWeight;
+    }
+
+    public String getInvoiceType() {
+        return invoiceType;
+    }
+
+    public String getSendAddr() {
+        return sendAddr;
+    }
+
+    public void setSendAddr(String sendAddr) {
+        this.sendAddr = sendAddr;
+    }
+
+    public String getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
+    }
+
+    public void setInvoiceType(String invoiceType) {
+        this.invoiceType = invoiceType;
     }
 
     public String getFeeSts() {
@@ -183,6 +213,46 @@ public class Contract extends DataEntity implements Serializable {
         this.signDate = signDate;
     }
 
+    public String getRsrvStr1() {
+        return rsrvStr1;
+    }
+
+    public void setRsrvStr1(String rsrvStr1) {
+        this.rsrvStr1 = rsrvStr1;
+    }
+
+    public String getRsrvStr2() {
+        return rsrvStr2;
+    }
+
+    public void setRsrvStr2(String rsrvStr2) {
+        this.rsrvStr2 = rsrvStr2;
+    }
+
+    public String getRsrvStr3() {
+        return rsrvStr3;
+    }
+
+    public void setRsrvStr3(String rsrvStr3) {
+        this.rsrvStr3 = rsrvStr3;
+    }
+
+    public String getRsrvStr4() {
+        return rsrvStr4;
+    }
+
+    public void setRsrvStr4(String rsrvStr4) {
+        this.rsrvStr4 = rsrvStr4;
+    }
+
+    public String getRsrvStr5() {
+        return rsrvStr5;
+    }
+
+    public void setRsrvStr5(String rsrvStr5) {
+        this.rsrvStr5 = rsrvStr5;
+    }
+
     @NotNull(message = "合同开始时间不能为空")
     public Date getStartDate() {
         return startDate;
@@ -201,56 +271,6 @@ public class Contract extends DataEntity implements Serializable {
         this.endDate = endDate;
     }
 
-    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE },mappedBy="contract")
-    public List<PFile> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<PFile> files) {
-        this.files = files;
-    }
-    @Transient
-    public List<CommonsMultipartFile> getFileData() {
-        return fileData;
-    }
-    @Transient
-    public void setFileData(List<CommonsMultipartFile> fileData) {
-        this.fileData = fileData;
-    }
-
-
-    public String getCoalType() {
-        return coalType;
-    }
-
-    public void setCoalType(String coalType) {
-        this.coalType = coalType;
-    }
-
-    public Integer getCalorie() {
-        return calorie;
-    }
-
-    public void setCalorie(Integer calorie) {
-        this.calorie = calorie;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public String getDeliveryPlace() {
-        return deliveryPlace;
-    }
-
-    public void setDeliveryPlace(String deliveryPlace) {
-        this.deliveryPlace = deliveryPlace;
-    }
-
     public String getTaxFlag() {
         return taxFlag;
     }
@@ -259,29 +279,6 @@ public class Contract extends DataEntity implements Serializable {
         this.taxFlag = taxFlag;
     }
 
-    public String getPayMode() {
-        return payMode;
-    }
-
-    public void setPayMode(String payMode) {
-        this.payMode = payMode;
-    }
-
-    public String getTransType() {
-        return transType;
-    }
-
-    public void setTransType(String transType) {
-        this.transType = transType;
-    }
-
-    public String getPayType() {
-        return payType;
-    }
-
-    public void setPayType(String payType) {
-        this.payType = payType;
-    }
 }
 
 

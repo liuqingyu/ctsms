@@ -32,13 +32,13 @@ public class SupplyService extends BaseService {
     @Autowired
     private SupplyDao supplyDao;
 
-    public Supply get(Long id){
+    public Supply get(/*Long*/String id){
         return  supplyDao.findBySupplyId(id);
     }
 
-    public List<Supply> findAll(){
+    /*public List<Supply> findAll(){
         return supplyDao.findAllList();
-    }
+    }*/
 
     @Transactional(readOnly = false)
     public void save(Supply supply){
@@ -46,11 +46,11 @@ public class SupplyService extends BaseService {
         CacheUtils.remove("supplyList");
     }
 
-    @Transactional(readOnly = false)
-    public void delete(Long id){
-        supplyDao.deleteBySupplyId(id);
-        CacheUtils.remove("supplyList");
-    }
+//    @Transactional(readOnly = false)
+//    public void delete(/*Long*/String id){
+//        supplyDao.deleteBySupplyId(id);
+//        CacheUtils.remove("supplyList");
+//    }
 
     public Page<Supply> find(Page<Supply> supplyPage, Supply supply) {
         DetachedCriteria dc = supplyDao.createDetachedCriteria();

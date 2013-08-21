@@ -59,10 +59,10 @@ public class ContractService extends BaseService {
 		contractDao.save(contract);
 	}
 	
-	@Transactional(readOnly = false)
+	/*@Transactional(readOnly = false)
 	public void delete(Long id) {
 		contractDao.deleteById(id);
-	}
+	}*/
 
     /*
      * 文件删除

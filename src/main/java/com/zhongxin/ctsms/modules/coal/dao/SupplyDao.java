@@ -18,15 +18,15 @@ import java.util.List;
  * Time: 下午10:11
  * To change this template use File | Settings | File Templates.
  */
-public interface SupplyDao extends SupplyDaoCustom, CrudRepository<Supply,Long> {
-    public Supply findBySupplyId(Long id);
+public interface SupplyDao extends SupplyDaoCustom, CrudRepository<Supply,/*Long*/String> {
+    public Supply findBySupplyId(/*Long*/String id);
 
-    @Query("from Supply where delFlag='" + Supply.DEL_FLAG_NORMAL + "'")
-    public List<Supply> findAllList();
-
-    @Modifying
+//    @Query("from Supply where delFlag='" + Supply.DEL_FLAG_NORMAL + "'")
+//    public List<Supply> findAllList();
+//
+    /*@Modifying
     @Query("update Supply set delFlag='" + Supply.DEL_FLAG_DELETE + "' where supplyId = ?1")
-    public void deleteBySupplyId(Long id);
+    public void deleteBySupplyId(Long id);*/
 
     List<Object[]> findBySupplyNameContaining(String name);
 

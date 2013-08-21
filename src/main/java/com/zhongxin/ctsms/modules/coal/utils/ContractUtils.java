@@ -28,7 +28,7 @@ public class ContractUtils {
         return name;
     }
 
-    public static String getSupplyName(Long Id){
+    public static String getSupplyName(/*Long*/String Id){
         String name = "";
         Supply supply = supplyDao.findBySupplyId(Id);
         if(supply != null){

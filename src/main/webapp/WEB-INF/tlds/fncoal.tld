@@ -14,8 +14,16 @@
         <description>获取供方名称</description>
         <name>getSupplyName</name>
         <function-class>com.zhongxin.ctsms.modules.coal.utils.ContractUtils</function-class>
-        <function-signature>java.lang.String getSupplyName(java.lang.Long)</function-signature>
+        <function-signature>java.lang.String getSupplyName(java.lang.String)</function-signature>
         <example>${fncoal:getSupplyName(id)}</example>
+    </function>
+
+    <function>
+        <description>获取供方编号</description>
+        <name>getSupplyId</name>
+        <function-class>com.zhongxin.ctsms.modules.coal.utils.ContractUtils</function-class>
+        <function-signature>java.lang.String getSupplyId()</function-signature>
+        <example>${fncoal:getSupplyName()}</example>
     </function>
 
     <function>

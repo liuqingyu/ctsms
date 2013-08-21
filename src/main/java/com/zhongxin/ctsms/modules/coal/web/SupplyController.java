@@ -34,7 +34,7 @@ public class SupplyController extends BaseController{
     private SupplyService supplyService;
 
     @ModelAttribute("supply")
-    public Supply get(@RequestParam(required = false) Long id){
+    public Supply get(@RequestParam(required = false) /*Long*/String id){
         if(id != null){
             return supplyService.get(id);
         }else {
@@ -67,13 +67,13 @@ public class SupplyController extends BaseController{
         return "redirect:"+Global.getAdminPath()+"/coal/supply/?repage";
     }
 
-    @RequiresPermissions("coal:supply:edit")
+    /*@RequiresPermissions("coal:supply:edit")
     @RequestMapping(value = "delete")
     public String delete(Long id, RedirectAttributes redirectAttributes) {
         supplyService.delete(id);
         addMessage(redirectAttributes, "删除供方信息成功");
         return "redirect:"+ Global.getAdminPath()+"/coal/supply/?repage";
-    }
+    }*/
 
     /**
      * 通过名字获取
